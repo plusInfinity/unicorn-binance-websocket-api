@@ -36,7 +36,7 @@
 from __future__ import print_function
 from .unicorn_binance_websocket_api_connection import BinanceWebSocketApiConnection
 from unicorn_fy.unicorn_fy import UnicornFy
-import ujson as json
+import json as json # Disable ujson
 import logging
 import sys
 import time
