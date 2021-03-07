@@ -276,10 +276,13 @@ class BinanceWebSocketApiConnection(object):
             except KeyError:
                 pass
             if received_data_json is not None:
-                size = sys.getsizeof(received_data_json)
-                self.manager.increase_processed_receives_statistic(self.stream_id)
-                self.manager.add_total_received_bytes(size)
-                self.manager.increase_received_bytes_per_second(self.stream_id, size)
+                if hasattr(received_data_json, '__len__'):
+                    size = len(received_data_json)
+                    self.manager.increase_processed_receives_statistic(self.stream_id)
+                    self.manager.add_total_received_bytes(size)
+                    self.manager.increase_received_bytes_per_second(self.stream_id, size)
+                else:
+                    print(f"ALEX: NO LEN FOR {received_data_json}")
             return received_data_json
         except RuntimeError as error_msg:
             logging.error("BinanceWebSocketApiConnection.receive(" +

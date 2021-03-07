@@ -55,7 +55,7 @@ import sys
 import threading
 import time
 import uuid
-import json as json # Disable ujson
+import json # Disable ujson
 
 
 class BinanceWebSocketApiManager(threading.Thread):
