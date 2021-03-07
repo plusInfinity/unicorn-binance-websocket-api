@@ -36,8 +36,7 @@
 from __future__ import print_function
 from .unicorn_binance_websocket_api_connection import BinanceWebSocketApiConnection
 from unicorn_fy.unicorn_fy import UnicornFy
-import json # Disable ujson
-import ujson
+import json
 import logging
 import sys
 import time
@@ -99,7 +98,7 @@ class BinanceWebSocketApiSocket(object):
                     payload = self.manager.stream_list[self.stream_id]['payload'].pop(0)
                     logging.info(f"BinanceWebSocketApiSocket.start_socket({str(self.stream_id)}, "
                                  f"{str(self.channels)}, {str(self.markets)} - Sending payload: {str(payload)}")
-                    await websocket.send(ujson.dumps(payload, ensure_ascii=False))
+                    await websocket.send(json.dumps(payload, ensure_ascii=False))
                     # To avoid a ban we respect the limits of binance:
                     # https://github.com/binance-exchange/binance-official-api-docs/blob/5fccfd572db2f530e25e302c02be5dec12759cf9/CHANGELOG.md#2020-04-23
                     # Limit: max 5 messages per second inclusive pings/pong
